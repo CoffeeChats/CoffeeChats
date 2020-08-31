@@ -25,7 +25,7 @@
             mail($from,$email_subject,$email,$headers);
             echo "Added: ".$first_name." ".$last_name;
 
-            $apiKey = 'SENDGRID_API_KEY';
+            $apiKey = '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';
             $sg = new \SendGrid($apiKey);
 
             $response = $sg->client->mail()->send()->post($mail);
