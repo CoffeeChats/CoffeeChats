@@ -27,7 +27,7 @@
             $mail = new SendGrid\Mail($from, $subject, $to, $content);
             
             //$apiKey = getenv('SENDGRID_API_KEY');
-            $sg = new \SendGrid(trim(file_get_contents("key")));
+            $sg = new \SendGrid(trim(file_get_contents("SENDGRID_API_KEY")));
             
             $response = $sg->client->mail()->send()->post($mail);
             echo $response->statusCode();
