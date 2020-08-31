@@ -4,10 +4,10 @@
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
-    $host = "127.0.0.1";
-    $dbUsername = "root";
-    $dbPassword = "Funkymonky1";
-    $dbname = "coffee_chats";
+    $host = "us-cdbr-east-02.cleardb.com";
+    $dbUsername = "b439f60082bbb1";
+    $dbPassword = "175824a2";
+    $dbname = "heroku_364712d29ce9e84";
     //create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
     if($conn->connect_error){
