@@ -19,7 +19,7 @@
         $sql = "insert into user(first_name, last_name, email, phone) values('$first_name', '$last_name', '$email', '$phone')";
 
         if ($conn->query($sql) === TRUE) {
-            $from = new \SendGrid\Email("Example User", "test@example.com");
+            $from = new \SendGrid\Email("Example User", "joshbarrientos1@gmail.com");
             $subject = "Sending with SendGrid is Fun";
             $to = new \SendGrid\Email("Example User", "joshbarrientos1@gmail.com");
             $content = new \SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
