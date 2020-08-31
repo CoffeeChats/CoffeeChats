@@ -10,8 +10,8 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         self::$apiKey = "SENDGRID_API_KEY";
         $host = array('host' => 'http://localhost:4010');
         self::$sg = new SendGrid(self::$apiKey, $host);
-        if( file_exists( '/usr/local/bin/prism' ) == false ) {
-            if(strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN'){
+        if (file_exists('/usr/local/bin/prism') == false) {
+            if (strtoupper(substr(php_uname('s'), 0, 3)) != 'WIN') {
                 try {
                     $proc_ls = proc_open("curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh",
                                         array(
@@ -41,7 +41,7 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
                     fclose($pipes[2]);
                     proc_close($proc_grep);
                 } catch (Exception $e) {
-                    print("Error downloading the prism binary, you can try downloading directly here (https://github.com/stoplightio/prism/releases) and place in your /user/local/bin directory: " .  $e->getMessage() . "\n");
+                    print("Error downloading the prism binary, you can try downloading directly here (https://github.com/stoplightio/prism/releases) and place in your /usr/local/bin directory: " .  $e->getMessage() . "\n");
                     exit();
                 }
             } else {
@@ -54,31 +54,49 @@ class SendGridTest_SendGrid extends \PHPUnit_Framework_TestCase
         exec($command, $op);
         self::$pid = (int)$op[0];
         sleep(15);
-        print("\nPrism Started");
+        print("\nPrism Started\n\n");
+    }
+
+    public function testHelloWorld()
+    {
+        $from = new SendGrid\Email("Example User", "test@example.com");
+        $subject = "Sending with SendGrid is Fun";
+        $to = new SendGrid\Email("Example User", "test@example.com");
+        $content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
+        $mail = new SendGrid\Mail($from, $subject, $to, $content);
+        $json = json_encode($mail->jsonSerialize());
+        $this->assertEquals($json, '{"from":{"name":"Example User","email":"test@example.com"},"personalizations":[{"to":[{"name":"Example User","email":"test@example.com"}]}],"subject":"Sending with SendGrid is Fun","content":[{"type":"text\/plain","value":"and easy to do anywhere, even with PHP"}]}');
     }
 
     public function testVersion()
     {
-        $this->assertEquals(SendGrid::VERSION, '5.0.9');
+        $this->assertEquals(SendGrid::VERSION, '6.0.0');
         $this->assertEquals(json_decode(file_get_contents(__DIR__ . '/../../composer.json'))->version, SendGrid::VERSION);
     }
 
     public function testSendGrid()
     {
-        $apiKey = "SENDGRID_API_KEY";
+        $apiKey = 'SENDGRID_API_KEY';
         $sg = new SendGrid($apiKey);
         $headers = array(
             'Authorization: Bearer '.$apiKey,
             'User-Agent: sendgrid/' . $sg->version . ';php',
             'Accept: application/json'
-            );
-        $this->assertEquals($sg->client->host, "https://api.sendgrid.com");
-        $this->assertEquals($sg->client->request_headers, $headers);
-        $this->assertEquals($sg->client->version, "/v3");
+        );
 
-        $apiKey = "SENDGRID_API_KEY";
+        $this->assertEquals($sg->client->getHost(), 'https://api.sendgrid.com');
+        $this->assertEquals($sg->client->getHeaders(), $headers);
+        $this->assertEquals($sg->client->getVersion(), '/v3');
+
+        $apiKey = 'SENDGRID_API_KEY';
         $sg2 = new SendGrid($apiKey, array('host' => 'https://api.test.com'));
-        $this->assertEquals($sg2->client->host, "https://api.test.com");
+        $this->assertEquals($sg2->client->getHost(), 'https://api.test.com');
+
+        $sg3 = new SendGrid($apiKey, array('curl' => array('foo' => 'bar')));
+        $this->assertEquals(array('foo' => 'bar'), $sg3->client->getCurlOptions());
+
+        $sg4 = new SendGrid($apiKey, ['curl' => [CURLOPT_PROXY => '127.0.0.1:8000']]);
+        $this->assertEquals($sg4->client->getCurlOptions(), [10004 => '127.0.0.1:8000']);
     }
 
     public function test_access_settings_activity_get()

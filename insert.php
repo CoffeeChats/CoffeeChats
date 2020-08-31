@@ -19,18 +19,19 @@
         $sql = "insert into user(first_name, last_name, email, phone) values('$first_name', '$last_name', '$email', '$phone')";
 
         if ($conn->query($sql) === TRUE) {
-            $email_subject = "Website Contact Form:  $first_name $last_name";
-            $email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nFirst name: $first_name\n\nLast name: $last_name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message";
-            $from = "coffeechats.network@gmail.com"; // This is the email address the generated message will be from. We recommend using something like noreply@yourdomain.com.
-            mail($from,$email_subject,$email,$headers);
-            echo "Added: ".$first_name." ".$last_name;
-
-            $apiKey = getenv('SENDGRID_API_KEY');
-            $sg = new \SendGrid($apiKey);
-
+            echo "added";
+            $from = new SendGrid\Email("Example User", "test@example.com");
+            $subject = "Sending with SendGrid is Fun";
+            $to = new SendGrid\Email("Example User", "kargirwar@gmail.com");
+            $content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
+            $mail = new SendGrid\Mail($from, $subject, $to, $content);
+            
+            //$apiKey = getenv('SENDGRID_API_KEY');
+            $sg = new \SendGrid(trim(file_get_contents("key")));
+            
             $response = $sg->client->mail()->send()->post($mail);
             echo $response->statusCode();
-            echo $response->headers();
+            print_r($response->headers());
             echo $response->body();
 
         } else {

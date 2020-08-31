@@ -3,6 +3,104 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [6.0.0] - 2017-06-30 ##
+### BREAKING CHANGE
+- PR #408: Update Mail constructor to signify which parameters are required for sending all email
+- The `Mail()` constructor now requires `$from`, `$subject`, `$to` and `$content` parameters like so: `Mail($from, $subject, $to, $content)`. Those are the minimaly required paramaters to send an email.
+- Thanks to [Casey Wilson](https://github.com/caseyw) for the PR!
+
+## [5.6.2] - 2017-06-29 ##
+### Fix
+- PR #410: Adding name for ReplyTo for issue #390
+- Thanks to [Casey Wilson](https://github.com/caseyw) for the PR!
+
+## [5.6.1] - 2017-06-26 ##
+### Fix
+- Versioning mistake (forgot the .0 at the end)
+
+## [5.6.0] - 2017-06-26 ##
+### Added
+- Pull #405: Updating docs and non-composer includes
+- Thanks to [Casey Wilson](https://github.com/caseyw) for the PR!
+
+## [5.5.1] - 2017-05-18 ##
+### Fixed
+- Pull #396: Use `print_r` instead of `echo` on Arrays
+- Thanks to [Ryan P.C. McQuen](https://github.com/ryanpcmcquen) for the PR!
+
+## [5.5.0] - 2017-05-04 ##
+### Added
+- Pull #393: Update [php-http-client](https://github.com/sendgrid/php-http-client) dependency
+- [v3.6](https://github.com/sendgrid/php-http-client/releases/tag/v3.6.0): Pass the curlOptions to the client in buildClient
+- [v3.7](https://github.com/sendgrid/php-http-client/releases/tag/v3.7.0): Added ability to get headers as associative array
+
+## [5.4.2] - 2017-04-18 ##
+### Fixes
+- Fixes #292
+- Removes Prism file in sendgrid-php.zip
+
+## [5.4.1] - 2017-04-04 ##
+### Added
+- Pull #373
+- PSR1 & PSR2 Conversion
+- Thanks to [Braunson Yager](https://github.com/Braunson) for the PR!
+
+## [5.4.0] - 2017-03-16 ##
+### Added
+- Pull #337
+- API level addressing of the string-only custom arg rule
+- Thanks to [Chris Schuld](https://github.com/cbschuld) for the PR!
+
+## [5.3.0] - 2017-03-15 ##
+### Added
+- Pull #367
+- UTF8 encoding forced for content value and message subject
+- Thanks to [Chris Schuld](https://github.com/cbschuld) for the PR!
+
+## [5.2.3] - 2017-03-03 ##
+### Fixed
+- Pull #334
+- Fixed serialization of empty JSON objects, fixes #332 & #314
+- Thanks to [Matthew Dreyer](https://github.com/Dreyer) for the PR!
+
+## [5.2.2] - 2017-03-03 ##
+### Fixed
+- Pull #323
+- Typo 'user' for 'usr'
+- Thanks to [Mike Ralphson](https://github.com/MikeRalphson) for the PR!
+
+## [5.2.1] - 2017-03-01 ##
+### Fixed
+- Pull #353
+- Fixed Issue #352
+- Relative path fix for background jobs
+- Thanks to [Tarcísio Zotelli Ferraz](https://github.com/tarcisiozf) for the PR!
+
+## [5.2.0] - 2017-02-23 ##
+### Added
+- Pull #346
+- Allow passing curlOptions to the client
+- Thanks to [Taluu](https://github.com/sendgrid/sendgrid-php/pull/346) for the PR!
+
+## [5.1.2] - 2016-10-11 ##
+### Added
+- Pull #330, Fixes #320
+- Delete subaccounts returns 200 issue resolved
+- The fix happened at the [php-http-client](https://github.com/sendgrid/php-http-client/releases/tag/v3.5.1) dependency.
+- Thanks to [emil](https://github.com/emilva) for the PR!
+
+## [5.1.1] - 2016-10-11 ##
+### Added
+- Pull #307, Fixes #276
+- Adds phpdoc and style fixes
+- Thanks to [Avishkar Autar](https://github.com/aautar) for the PR!
+
+## [5.1.0] - 2016-09-29 ##
+### Fixed
+- Pull #295: [Upgrade sendgrid/php-http-client](https://github.com/sendgrid/sendgrid-php/pull/295/files)
+- This adds getters for certain properties, please see [this pull request](https://github.com/sendgrid/php-http-client/pull/9) for details
+- Thanks to [Arjan Keeman](https://github.com/akeeman) for the pull request!
+
 ## [5.0.9] - 2016-09-13 ##
 ### Fixed
 - Pull request #289: [Replace "\jsonSerializable" with "\JsonSerializable" ](https://github.com/sendgrid/sendgrid-php/pull/289)
