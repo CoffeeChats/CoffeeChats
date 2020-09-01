@@ -1,6 +1,8 @@
 <?php
     require 'vendors/autoload.php';
-    require 'config/config.php';
+
+    //use if local testing. Ask Josh for config file
+    //require 'config/config.php';
 
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
@@ -8,7 +10,10 @@
     $phone = $_POST['phone'];
 
     //create connection
-    $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
+
+    //use if local testing. Ask Josh for config file
+    //$conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
+    $conn = new mysqli(getenv(host), getenv(dbUsername), getenv(dbPassword), getenv(dbname));
     if($conn->connect_error){
         echo "$conn->connect_error";
         die("Connection Failed : ". $conn->connect_error);
@@ -23,8 +28,10 @@
             $mail = new \SendGrid\Mail($from, $subject, $to, $content);
             echo "Added: ".$first_name." ".$last_name;
 
-            $sg = new \SendGrid($apiKey);
+            //use if local test. Ask Josh for config file
+            //$sg = new \SendGrid($apiKey);
 
+            $sg = new \SendGrid(getenv(apiKey));
             $response = $sg->client->mail()->send()->post($mail);
             echo $response->statusCode();
             echo $response->headers();
