@@ -1,15 +1,12 @@
 <?php
     require 'vendor/autoload.php';
+    require 'config/config.php';
 
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
-    $host = "us-cdbr-east-02.cleardb.com";
-    $dbUsername = "b439f60082bbb1";
-    $dbPassword = "175824a2";
-    $dbname = "heroku_364712d29ce9e84";
     //create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
     if($conn->connect_error){
@@ -26,7 +23,6 @@
             $mail = new \SendGrid\Mail($from, $subject, $to, $content);
             echo "Added: ".$first_name." ".$last_name;
 
-            $apiKey = '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';
             $sg = new \SendGrid($apiKey);
 
             $response = $sg->client->mail()->send()->post($mail);
