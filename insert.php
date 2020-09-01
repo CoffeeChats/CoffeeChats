@@ -1,17 +1,19 @@
 <?php
-    require 'vendor/autoload.php';
+    require 'vendors/autoload.php';
+
+    //use if local testing. Ask Josh for config file
+    //require 'config/config.php';
 
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
-    $host = "us-cdbr-east-02.cleardb.com";
-    $dbUsername = "b439f60082bbb1";
-    $dbPassword = "175824a2";
-    $dbname = "heroku_364712d29ce9e84";
     //create connection
-    $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
+
+    //use if local testing. Ask Josh for config file
+    //$conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
+    $conn = new mysqli(getenv(host), getenv(dbUsername), getenv(dbPassword), getenv(dbname));
     if($conn->connect_error){
         echo "$conn->connect_error";
         die("Connection Failed : ". $conn->connect_error);
@@ -26,9 +28,10 @@
             $mail = new \SendGrid\Mail($from, $subject, $to, $content);
             echo "Added: ".$first_name." ".$last_name;
 
-            $apiKey = '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';
-            $sg = new \SendGrid($apiKey);
+            //use if local test. Ask Josh for config file
+            //$sg = new \SendGrid($apiKey);
 
+            $sg = new \SendGrid(getenv(apiKey));
             $response = $sg->client->mail()->send()->post($mail);
             echo $response->statusCode();
             echo $response->headers();
