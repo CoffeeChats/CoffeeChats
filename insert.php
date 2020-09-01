@@ -1,5 +1,5 @@
 <?php
-    require 'vendor/autoload.php';
+    require 'vendors/autoload.php';
     require 'config/config.php';
 
     $first_name = $_POST['first_name'];
