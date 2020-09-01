@@ -20,9 +20,9 @@
 
         if ($conn->query($sql) === TRUE) {
             $from = new \SendGrid\Email("Example User", "joshbarrientos1@gmail.com");
-            $subject = "Sending with SendGrid is Fun";
-            $to = new \SendGrid\Email("Example User", "joshbarrientos1@gmail.com");
-            $content = new \SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
+            $subject = "Website Contact Form:  $first_name $last_name";
+            $to = new \SendGrid\Email("Example User", $email);
+            $content = new \SendGrid\Content("text/plain", "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nFirst name: $first_name\n\nLast name: $last_name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message");
             $mail = new \SendGrid\Mail($from, $subject, $to, $content);
             echo "Added: ".$first_name." ".$last_name;
 
