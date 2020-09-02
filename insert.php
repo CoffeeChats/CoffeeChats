@@ -21,10 +21,10 @@
         $sql = "insert into user(first_name, last_name, email, phone) values('$first_name', '$last_name', '$email', '$phone')";
 
         if ($conn->query($sql) === TRUE) {
-            $from = new \SendGrid\Email("Example User", "coffeechats.network@gmail.com");
-            $subject = "Website Contact Form:  $first_name $last_name";
-            $to = new \SendGrid\Email("Example User", $email);
-            $content = new \SendGrid\Content("text/plain", "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nFirst name: $first_name\n\nLast name: $last_name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message");
+            $from = new \SendGrid\Email("CoffeeChats", "coffeechats.network@gmail.com");
+            $subject = "CoffeeChats Mentorship Program Survey for:  $first_name $last_name";
+            $to = new \SendGrid\Email("New Chatter", $email);
+            $content = new \SendGrid\Content("text/plain", "Proceed to the following link to fill out your survey and be matched up with your mentor! \nhttps://docs.google.com/forms/d/e/1FAIpQLSepDBgaTkvQ1yhL85Z08Dx3Ne-Bv1mslbQ7VWwY_Lw-ce2PDQ/viewform");
             $mail = new \SendGrid\Mail($from, $subject, $to, $content);
             echo "Added: ".$first_name." ".$last_name;
 
