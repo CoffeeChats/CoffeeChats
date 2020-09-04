@@ -24,8 +24,8 @@
             $from = new \SendGrid\Email("CoffeeChats", "coffeechats.network@gmail.com");
             $subject = "CoffeeChats Mentorship Program Survey for:  $first_name $last_name";
             $to = new \SendGrid\Email("New Chatter", $email);
-            $html_code = '<a href="https://forms.gle/vDtRHQe474Wt4ZVG8">Click Here</a>';
-            $content = new \SendGrid\Content("text/html",$html_code);
+            $html_code = '<a href="https://forms.gle/vDtRHQe474Wt4ZVG8">Questionnaire</a>';
+            $content = new \SendGrid\Content("text/html","Hey $first_name\nThank you for signing up!\nLinked below is the questionnaire for the program to better understand your needs. Please complete the survey within the next 5 days. Once completed our team will match you with a mentor that best fits your interests.\n$html_code\nWe look forward to connecting!\nBest\nCoffeeChats Team");
             $mail = new \SendGrid\Mail($from, $subject, $to, $content);
             echo "Added: ".$first_name." ".$last_name;
 
