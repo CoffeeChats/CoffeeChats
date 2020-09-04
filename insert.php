@@ -24,7 +24,8 @@
             $from = new \SendGrid\Email("CoffeeChats", "coffeechats.network@gmail.com");
             $subject = "CoffeeChats Mentorship Program Survey for:  $first_name $last_name";
             $to = new \SendGrid\Email("New Chatter", $email);
-            $content = new \SendGrid\Content("text/plain", "Proceed to the following link to fill out your survey and be matched up with your mentor! \nhttps://docs.google.com/forms/d/e/1FAIpQLSepDBgaTkvQ1yhL85Z08Dx3Ne-Bv1mslbQ7VWwY_Lw-ce2PDQ/viewform");
+            $html_code = '<a href="https://forms.gle/vDtRHQe474Wt4ZVG8">Click Here</a>';
+            $content = new \SendGrid\Content("text/html",$html_code);
             $mail = new \SendGrid\Mail($from, $subject, $to, $content);
             echo "Added: ".$first_name." ".$last_name;
 
